@@ -2,27 +2,24 @@ from classes.game import Person, bcolors
 from classes.magic import Spell
 from classes.inventory import Item
 
-print("\n\n")
-print("NAME                        HP                                              MP")
 
-print("\n\n")
 
 #Black Magic = fight
-fire = Spell("Fire", 6, 100, "black")
-thunder = Spell("Thunder", 15, 124, "black")
-blizzard = Spell("Blizzard", 5, 80, "black")
-meteor = Spell("Meteor", 10, 160, "black")
-quake = Spell("Quake", 4, 20, "black")
+fire = Spell("Fire", 60, 600, "black")
+thunder = Spell("Thunder", 80, 900, "black")
+blizzard = Spell("Blizzard", 30, 800, "black")
+meteor = Spell("Meteor", 90, 1060, "black")
+quake = Spell("Quake", 20, 120, "black")
 
 #White Magic = heal
-cure = Spell("Cure", 12, 120, "white")
-cura = Spell("Cura", 18, 200, "white")
+cure = Spell("Cure", 80, 620, "white")
+cura = Spell("Cura", 90, 1500, "white")
 
 
 #Create some Items
 potion = Item("Potion", "potion", "Heals 50 HP", 50)
 hipotion = Item("Hi-Potion", "potion", "Heals 100 HP", 100)
-superpotion = Item("Super Potion", "potion", "Heals 500 HP", 500)
+superpotion = Item("Super Potion", "potion", "Heals 500 HP", 1000)
 elixer = Item("Elixer", "elixer", "fully resores HP/MP of one party member", 9999)
 hielixer = Item("Mega Elixer", "elixer", "fully resores party's MP/HP", 9999)
 
@@ -32,10 +29,10 @@ player_spells = [fire, thunder, blizzard, meteor, cure, cura]
 player_items = [{"item": potion, "quantity": 15}, {"item": hipotion, "quantity": 5}, {"item": superpotion, "quantity": 5}, {"item": elixer, "quantity": 5}, {"item": hielixer, "quantity": 2}, {"item": grenade, "quantity": 5}]
 
 #instance of People
-player1 = Person("Kat   :", 3460, 65, 60, 34, player_spells, player_items)
-player2 = Person("Kevin :", 2460, 65, 60, 34, player_spells, player_items)
-player3 = Person("Lauren:", 4460, 65, 60, 34, player_spells, player_items)
-enemy = Person("Bebop :", 1200, 65, 45, 25, [], [])
+player1 = Person("Kat   :", 3460, 132, 300, 34, player_spells, player_items)
+player2 = Person("Kevin :", 2460, 188, 288, 34, player_spells, player_items)
+player3 = Person("Lauren:", 4460, 174, 311, 34, player_spells, player_items)
+enemy = Person("Cheese :", 11200, 701, 525, 25, [], [])
 
 players = [player1, player2, player3]
 
@@ -49,6 +46,7 @@ while running:
     print("===================")
 
     print("\n\n")
+    print("NAME                       HP                                           MP")
 
     for player in players:
          player.get_stats()
@@ -56,9 +54,9 @@ while running:
     print("\n")
 
     for player in players:
-      
+
       player.choose_action()
-      choice = input("Choose action: ")
+      choice = input("    Choose action: ")
       index = int(choice) - 1
 
       if index == 0:
@@ -67,7 +65,7 @@ while running:
           print("You attacked for ", dmg, "points of damage.")
       elif index == 1:
           player.choose_magic()
-          magic_choice = int(input("Choose magic:")) - 1
+          magic_choice = int(input("    Choose magic:")) - 1
 
           if magic_choice == -1:
               continue
@@ -95,7 +93,7 @@ while running:
               print(bcolors.OKBLUE + "\n" + spell.name + " deals", str(magic_dmg), "points of damage" + bcolors.ENDC)
       elif index == 2:
           player.choose_item()
-          item_choice = int(input("Choose item: ")) -1
+          item_choice = int(input("    Choose item: ")) -1
 
           if item_choice == -1:
               continue
