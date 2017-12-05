@@ -85,6 +85,48 @@ class Person:
             print("        " + str(i) + ".", item["item"].name + ":", item["item"].description, " (x" + str(item["quantity"]) +")")
             i += 1
 
+    def choose_target(self, enemies):
+            i = 1
+            print("\n" + bcolors.FAIL + bcolors.BOLD + "    TARGET:" + bcolors.ENDC)
+            for enemy in enemies:
+                if enemy.get_hp() != 0:
+                    print("        " + str(i) + ".", enemy.name)
+                    i += 1
+            choice = int(input("    Choose target:")) -1
+            return choice
+
+    def get_enemy_stats(self):
+        hp_bar = ""
+        bar_ticks = (self.hp / self.maxhp) * 100 / 2
+
+        while bar_ticks > 0:
+            hp_bar += "█"
+            bar_ticks -= 1
+
+        while len(hp_bar) < 50:
+            hp_bar += " "
+
+        # this accounts for white space if the number of hp or mp is less that 4 and 3 digits
+        hp_string = str(self.hp) + "/" + str(self.maxhp)
+        current_hp = ""
+
+        if len(hp_string) < 11:
+            decreased = 11- len(hp_string)
+
+            while decreased > 0:
+                current_hp += " "
+                decreased -= 1
+
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
+
+
+        print("                                  __________________________________________________")
+        print(bcolors.BOLD + self.name +"        " +
+          current_hp + "  |" + bcolors.FAIL + hp_bar + bcolors.ENDC + bcolors.BOLD + "|")
+
+
     def get_stats(self):
         hp_bar = ""
         bar_ticks = (self.hp / self.maxhp) * 100 / 4
